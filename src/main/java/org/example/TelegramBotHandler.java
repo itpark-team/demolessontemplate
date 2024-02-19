@@ -6,10 +6,12 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.ArrayList;
+
 public class TelegramBotHandler extends TelegramLongPollingBot {
 
-    String botUsername = "";
-    String botToken = "";
+    private String botUsername = "";
+    private String botToken = "";
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -17,12 +19,14 @@ public class TelegramBotHandler extends TelegramLongPollingBot {
             Message messageFromUser = update.getMessage();
 
             if (messageFromUser.hasText() == true) {
-                String textFromMessage = messageFromUser.getText();
+                String textFromUser = messageFromUser.getText();
                 long chatId = messageFromUser.getChatId();
+
+                String textToUser = "";
 
                 SendMessage messageToUser = new SendMessage();
                 messageToUser.setChatId(chatId);
-                messageToUser.setText("я получил: " + textFromMessage);
+                messageToUser.setText(textToUser);
 
                 try {
                     execute(messageToUser);
